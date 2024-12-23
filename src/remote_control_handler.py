@@ -14,7 +14,7 @@ class RemoteControlHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         """Handle GET requests."""
         self.send_response(200)  # 200: OK
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", "text/html; charset=utf-8")
         self.end_headers()
         self.wfile.write(io.FileIO("index.html").read())
 
