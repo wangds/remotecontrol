@@ -2,17 +2,32 @@
   <head>
     <title>Remote Control</title>
     <script language="javascript" type="text/javascript">
+      function update(state) {
+        if (state.is_muted !== undefined) {
+          document.getElementById("mute").textContent = state.is_muted ? "🔇" : "🔊";
+        }
+      }
+
       function toggleMute() {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "mute", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            update(JSON.parse(xhr.responseText));
+          }
+        };
       }
     </script>
   </head>
   <body>
     <div>
-      <button id="mute" onclick="toggleMute()">🔊/🔇</button>
+      <button id="mute" onclick="toggleMute()"></button>
     </div>
+
+    <script language="javascript" type="text/javascript">
+      update({{ STATE }});
+    </script>
   </body>
 </html>
