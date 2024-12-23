@@ -1,8 +1,18 @@
 <html>
   <head>
     <title>Remote Control</title>
+    <script language="javascript" type="text/javascript">
+      function toggleMute() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "mute", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send();
+      }
+    </script>
   </head>
   <body>
-    Hello, World!
+    <div>
+      <button id="mute" onclick="toggleMute()">Mute/Unmute</button>
+    </div>
   </body>
 </html>
