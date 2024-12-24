@@ -5,6 +5,17 @@ description = ""
 authors = ["Sarah Wang <millimillenary@gmail.com>"]
 readme = "README.md"
 
+packages = [
+  { include = "src" },
+]
+
+include = [
+  { path = "favicon.svg" },
+  { path = "index.css" },
+  { path = "index.html" },
+  { path = "remotecontrol.py" },
+]
+
 [tool.poetry.dependencies]
 python = "^3.12"
 
