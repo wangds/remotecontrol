@@ -15,7 +15,11 @@ class RemoteControlHandler(BaseHTTPRequestHandler):
     # pylint: disable-next=C0103
     def do_GET(self) -> None:
         """Handle GET requests."""
-        src = self.render_index()
+
+        if self.path == "/index.css":
+            src = io.FileIO(self.path[1:]).read()
+        else:
+            src = self.render_index()
 
         self.send_response(200)  # 200: OK
         self.send_header("Content-type", "text/html; charset=utf-8")
