@@ -15,14 +15,18 @@ class RemoteControlHandler(BaseHTTPRequestHandler):
     # pylint: disable-next=C0103
     def do_GET(self) -> None:
         """Handle GET requests."""
+        content_type = "text/html; charset=utf-8"
 
-        if self.path == "/index.css":
+        if self.path == "/favicon.svg":
+            src = io.FileIO(self.path[1:]).read()
+            content_type = "image/svg+xml"
+        elif self.path == "/index.css":
             src = io.FileIO(self.path[1:]).read()
         else:
             src = self.render_index()
 
         self.send_response(200)  # 200: OK
-        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.send_header("Content-type", content_type)
         self.end_headers()
         self.wfile.write(src)
 
