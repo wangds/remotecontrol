@@ -52,6 +52,15 @@ class RemoteControlHandler(BaseHTTPRequestHandler):
 
             state = State().populate_is_muted()
             self.wfile.write(bytes(state.json(), "utf-8"))
+        elif self.path == "/volDown" or self.path == "/volUp":
+            self.send_response(200)  # 200: OK
+            self.send_header("Content-type", "text/json")
+            self.end_headers()
+            adjust = "-5%" if self.path == "/volDown" else "+5%"
+            subprocess.run(
+                ["/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", adjust],
+                check=True,
+            )
         else:
             self.send_response(400)  # 400: Bad Request
             self.end_headers()

@@ -21,11 +21,20 @@
           }
         };
       }
+
+      function adjustVolume(cmd) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", cmd, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send();
+      }
     </script>
   </head>
   <body>
-    <div>
+    <div class="vol">
       <button id="mute" onclick="toggleMute()"></button>
+      <button id="voldown" onclick="adjustVolume('volDown')">&nbsp;-</button>
+      <button id="volup" onclick="adjustVolume('volUp')">+&nbsp;</button>
     </div>
 
     <script language="javascript" type="text/javascript">
