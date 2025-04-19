@@ -1,12 +1,13 @@
 # Getting Started
 
-    poetry install [--without=dev]
-    poetry shell
+    uv sync [--without-dev]
+    uv venv
+    source .venv/bin/activate
 
 # Install Service
 
 Make package.
 
-    poetry build
+    uv build --sdist
 
 Unpack into `~/service/remotecontrol` and make a `run` script.
