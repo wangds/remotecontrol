@@ -52,7 +52,7 @@ class RemoteControlHandler(BaseHTTPRequestHandler):
 
             state = State().populate_is_muted()
             self.wfile.write(bytes(state.json(), "utf-8"))
-        elif self.path == "/volDown" or self.path == "/volUp":
+        elif self.path in ("/volDown", "/volUp"):
             self.send_response(200)  # 200: OK
             self.send_header("Content-type", "text/json")
             self.end_headers()
